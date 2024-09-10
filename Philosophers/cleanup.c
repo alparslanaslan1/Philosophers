@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:58:44 by alaslan           #+#    #+#             */
-/*   Updated: 2024/06/10 17:15:15 by alaslan          ###   ########.fr       */
+/*   Updated: 2024/09/11 00:59:19 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	err_exit(char *str)
+void	free_malloc(t_table *table)
 {
-	printf("%s", str);
-	exit(0);
+	if (table->philo != NULL)
+		free(table->philo);
+	if (table->forks != NULL)
+		free(table->forks);
 }
 
-int	free_malloc(t_table *table)
-{
-	free(table->philo);
-	free(table->forks);
-	return (SUCCESS);
-}
-
-int	destroy_mutex(t_table *table, int num)
+void	destroy_mutex(t_table *table, int num)
 {
 	int	i;
 
@@ -44,5 +39,5 @@ int	destroy_mutex(t_table *table, int num)
 		pthread_mutex_destroy(&table->m_eat);
 	if (i++ < num)
 		pthread_mutex_destroy(&table->m_with_eat);
-	return (free_malloc(table));
+	free_malloc(table);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:25:40 by alaslan           #+#    #+#             */
-/*   Updated: 2024/07/09 17:46:45 by alaslan          ###   ########.fr       */
+/*   Updated: 2024/09/11 00:56:26 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	init_mutex(t_table *table)
 	return (SUCCESS);
 }
 
-int	creating_table(t_table *table, char **av)
+int init_table(t_table *table, char **av)
 {
 	table->total_philo = philo_atoi(av[1]);
 	table->time_to_die = philo_atoi(av[2]);
@@ -70,14 +70,22 @@ int	creating_table(t_table *table, char **av)
 	table->philo = NULL;
 	if (av[5])
 		table->meals_limit = philo_atoi(av[5]);
+	if (table->total_philo == 0 || table->time_to_die == 0
+		|| table->eating_time == 0 || table->sleeping_time == 0
+		||(av[5] && table->meals_limit == 0))
+		return (ERROR);
+	return (SUCCESS);
+}
+
+int	creating_table(t_table *table)
+{
 	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* table->total_philo);
 	if (!table->forks)
 		return (ERROR);
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->total_philo);
 	if (!table->philo)
-		return (err_exit(M_ERROR), destroy_mutex(table, table->total_philo
-				+ 5), ERROR);
+		return (printf(M_ERROR), ERROR);
 	if (init_mutex(table))
 		return (ERROR);
 	init_philo(table);

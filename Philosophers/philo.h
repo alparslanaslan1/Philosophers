@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
+/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:57:15 by alaslan           #+#    #+#             */
-/*   Updated: 2024/07/09 18:02:20 by alaslan          ###   ########.fr       */
+/*   Updated: 2024/09/11 00:59:24 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PHILO_H
 
 # include <pthread.h>
+#include <stdint.h>
+
 
 # define M_ERROR "ERROR! AlLocation error.\n"
 # define CHECK_ARGS "Check ur ARGS.\n"
@@ -31,24 +33,24 @@ typedef struct s_philo
 	int				amount_eaten;
 	int				fork_left;
 	int				fork_right;
-	u_int64_t		time_last_meal;
+	uint64_t time_last_meal;
 	struct s_table	*table;
 }					t_philo;
 
 typedef struct s_table
 {
 	t_philo			*philo;
-	u_int64_t		time_to_die;
+	uint64_t		time_to_die;
 	int				total_philo;
 	int				eating_time;
 	int				sleeping_time;
 	int				meals_limit;
 	int				is_there_death;
-	u_int64_t		time_of_death;
+	uint64_t		time_of_death;
 	int				id_of_deceased;
 	int				check_meal_count;
 	int				num;
-	u_int64_t		start_time;
+	uint64_t		start_time;
 	pthread_mutex_t	m_with_eat;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	m_print;
@@ -60,7 +62,8 @@ typedef struct s_table
 // init_table
 void				init_philo(t_table *table);
 int					init_mutex(t_table *table);
-int					creating_table(t_table *table, char **av);
+int					init_table(t_table *table, char **av);
+int					creating_table(t_table *table);
 // simulation
 int					create_threads(t_table *table);
 int					monitor_threads(t_table *table, int i);
@@ -74,12 +77,11 @@ void				*philo_life(void *arg);
 // ultis
 void				print_message(t_table *philo, char *str, int number,
 						int flag);
-u_int64_t			get_time(void);
-void				milisleep(u_int64_t time);
+uint64_t			get_time(void);
+void				milisleep(uint64_t time);
 int					philo_atoi(char *str);
 // cleanup
-int					destroy_mutex(t_table *table, int num);
-int					free_malloc(t_table *table);
-void				err_exit(char *str);
+void				destroy_mutex(t_table *table, int num);
+void				free_malloc(t_table *table);
 
 #endif
