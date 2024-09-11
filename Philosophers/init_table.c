@@ -6,7 +6,7 @@
 /*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:25:40 by alaslan           #+#    #+#             */
-/*   Updated: 2024/09/11 00:56:26 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/09/12 01:29:29 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,13 @@ int init_table(t_table *table, char **av)
 		|| table->eating_time == 0 || table->sleeping_time == 0
 		||(av[5] && table->meals_limit == 0))
 		return (ERROR);
-	return (SUCCESS);
-}
-
-int	creating_table(t_table *table)
-{
 	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
-			* table->total_philo);
+		* table->total_philo);
 	if (!table->forks)
 		return (ERROR);
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->total_philo);
 	if (!table->philo)
 		return (printf(M_ERROR), ERROR);
-	if (init_mutex(table))
-		return (ERROR);
-	init_philo(table);
-	return (SUCCESS);
+	return (init_philo(table), SUCCESS);
 }
+

@@ -6,7 +6,7 @@
 /*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:33:16 by alaslan           #+#    #+#             */
-/*   Updated: 2024/09/11 00:59:32 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/09/12 01:29:55 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,21 @@ int	main(int ac, char **av)
 	t_table	table;
 
 	if (ac < 5 || ac > 6)
-	{
-		printf("missing or too many arguments entered.");
-		return (ERROR);
-	}
+		return (printf("missing or too many arguments entered."), ERROR);
 	if (init_table(&table, av) != SUCCESS)
 	{
 		printf(CHECK_ARGS);
+		free_malloc(&table);
 		return (ERROR);
 	}
-	if (creating_table(&table) != SUCCESS)
+	// if (creating_table(&table) != SUCCESS)
+	// {
+	// 	printf(CREATING_TABLE_ERROR);
+	// 	return (ERROR);
+	// }
+	if (init_mutex(&table) != SUCCESS)
 	{
-		printf(CREATING_TABLE_ERROR);
+		printf(MUTEX_INIT_ERROR);
 		destroy_mutex(&table, table.num);
 		return (ERROR);
 	}
