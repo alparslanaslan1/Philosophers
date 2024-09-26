@@ -6,12 +6,11 @@
 /*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:17:31 by alaslan           #+#    #+#             */
-/*   Updated: 2024/07/09 17:51:21 by alaslan          ###   ########.fr       */
+/*   Updated: 2024/09/17 14:49:31 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
 
 int	create_threads(t_table *table)
 {

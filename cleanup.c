@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:58:44 by alaslan           #+#    #+#             */
-/*   Updated: 2024/09/11 00:59:19 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:49:39 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 void	free_malloc(t_table *table)

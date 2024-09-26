@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_table.c                                       :+:      :+:    :+:   */
+/*   created_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:25:40 by alaslan           #+#    #+#             */
-/*   Updated: 2024/09/12 01:29:29 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:16:29 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,26 @@ int	init_mutex(t_table *table)
 	i = -1;
 	while (++i < table->total_philo)
 		if (pthread_mutex_init(&table->forks[i], NULL) != SUCCESS)
-			return (table->num = i, ERROR);
+			return (table->m_count = i, ERROR);
 	if (pthread_mutex_init(&table->m_print, NULL) != SUCCESS)
-		return (printf(MUTEX_INIT_ERROR), table->num = table->total_philo,
+		return (printf(MUTEX_INIT_ERROR), table->m_count = table->total_philo,
 			ERROR);
 	if (pthread_mutex_init(&table->m_die, NULL) != SUCCESS)
-		return (printf(MUTEX_INIT_ERROR), table->num = table->total_philo + 1,
-			ERROR);
+		return (printf(MUTEX_INIT_ERROR), table->m_count = table->total_philo
+			+ 1, ERROR);
 	if (pthread_mutex_init(&table->m_time, NULL) != SUCCESS)
-		return (printf(MUTEX_INIT_ERROR), table->num = table->total_philo + 2,
-			ERROR);
+		return (printf(MUTEX_INIT_ERROR), table->m_count = table->total_philo
+			+ 2, ERROR);
 	if (pthread_mutex_init(&table->m_eat, NULL) != SUCCESS)
-		return (printf(MUTEX_INIT_ERROR), table->num = table->total_philo + 3,
-			ERROR);
+		return (printf(MUTEX_INIT_ERROR), table->m_count = table->total_philo
+			+ 3, ERROR);
 	if (pthread_mutex_init(&table->m_with_eat, NULL) != SUCCESS)
-		return (printf(MUTEX_INIT_ERROR), table->num = table->total_philo + 4,
-			ERROR);
+		return (printf(MUTEX_INIT_ERROR), table->m_count = table->total_philo
+			+ 4, ERROR);
 	return (SUCCESS);
 }
 
-int init_table(t_table *table, char **av)
+int	init_table(t_table *table, char **av)
 {
 	table->total_philo = philo_atoi(av[1]);
 	table->time_to_die = philo_atoi(av[2]);
@@ -65,17 +65,17 @@ int init_table(t_table *table, char **av)
 	table->meals_limit = -1;
 	table->is_there_death = 0;
 	table->check_meal_count = 0;
-	table->num = 0;
+	table->m_count = 0;
 	table->start_time = get_time();
 	table->philo = NULL;
 	if (av[5])
 		table->meals_limit = philo_atoi(av[5]);
 	if (table->total_philo == 0 || table->time_to_die == 0
-		|| table->eating_time == 0 || table->sleeping_time == 0
-		||(av[5] && table->meals_limit == 0))
+		|| table->eating_time == 0 || table->sleeping_time == 0 || (av[5]
+			&& table->meals_limit == 0))
 		return (ERROR);
 	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
-		* table->total_philo);
+			* table->total_philo);
 	if (!table->forks)
 		return (ERROR);
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->total_philo);
@@ -83,4 +83,3 @@ int init_table(t_table *table, char **av)
 		return (printf(M_ERROR), ERROR);
 	return (init_philo(table), SUCCESS);
 }
-

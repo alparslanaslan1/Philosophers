@@ -6,22 +6,22 @@
 #    By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/05 12:33:35 by alaslan           #+#    #+#              #
-#    Updated: 2024/07/09 18:04:14 by alaslan          ###   ########.fr        #
+#    Updated: 2024/09/12 18:12:34 by alaslan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= philo
 
 CC = gcc
-CFLAGS	= -Wall -Wextra -Werror #-fsanitize=thread -pthread -g
+CFLAGS	= -Wall -Wextra -Werror
 
 RM = rm -rf
 
-SRC = main.c \
-		init_table.c \
-		utils.c \
-		threads_start.c \
-		cleanup.c \
+SRC = main.c			\
+		created_table.c	\
+		utils.c			\
+		threads_start.c	\
+		cleanup.c		\
 		simulation.c
 
 OBJ = $(SRC:.c=.o)

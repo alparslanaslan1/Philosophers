@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:33:52 by alaslan           #+#    #+#             */
-/*   Updated: 2024/09/11 00:55:42 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:47:36 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/time.h>
 #include <unistd.h>
 
@@ -20,9 +19,9 @@ void	print_message(t_table *table, char *str, int number, int flag)
 {
 	pthread_mutex_lock(&table->m_time);
 	if (flag == 1)
-		printf("%lu %d %s\n", get_time() - table->start_time, number, str);
+		printf("%llu %d %s\n", get_time() - table->start_time, number, str);
 	if (flag == 2)
-		printf("%lu %d is died\n", table->time_of_death,
+		printf("%llu %d is died\n", table->time_of_death,
 			table->id_of_deceased);
 	pthread_mutex_unlock(&table->m_time);
 }
@@ -63,12 +62,12 @@ int	philo_atoi(char *str)
 	while ((str[i] >= '0' && str[i] <= '9') || str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (printf("incorrect argument entered"), 0);
+			return (0);
 		res = res * 10;
 		res = res + str[i] - 48;
 		i++;
 		if (res > 2147483647 || res == 0)
-			return (printf("incorrect argument entered"), 0);
+			return (0);
 	}
 	return (res);
 }

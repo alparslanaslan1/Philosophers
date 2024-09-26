@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   threads_start.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 12:33:47 by alaslan           #+#    #+#             */
-/*   Updated: 2024/09/12 01:47:26 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:49:35 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
 
 int	check_dead_function(t_table *table, t_philo *philo)
 {
